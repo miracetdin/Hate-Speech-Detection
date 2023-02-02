@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Anasayfa {% endblock %}
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="row">
+      <div class="col-2">
+        <div class="list-group" style="position: fixed; margin-top: 70px">
+            <a href="{% url 'home' %}" class="list-group-item list-group-item-action active" aria-current="true">Çalışma Hakkında Bilgiler</a>
+            <a href="{% url 'dataset' %}" class="list-group-item list-group-item-action">Veri Seti</a>
+            <a href="{% url 'examples' %}" class="list-group-item list-group-item-action">Örnekler</a>
+        </div>
+      </div>
+      <div class="col-10">
+        <h1 class="text-center mt-2" style="color: blue;">Çalışma Hakkında Bilgiler</h1>
+        <hr>
+        <div class="container mt-3">
+          <div class="card mb-5">
+            <h3 style="color: blue">Kullanılan Metot</h3>
+            <div class="card-body">
+              <p>Logistic Regression</p>
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Veri Seti Özellikleri</h3>
+            <div class="card-body" style="margin-left:auto;margin-right:auto;">
+              {{ info|safe }}
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Başarı Metrikleri</h3>
+            <div class="card-body">
+              <p><b>F1 Score:</b> {{ score_f1|safe }} </p>
+              <p><b>Accuracy:</b> {{ accuracy|safe }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

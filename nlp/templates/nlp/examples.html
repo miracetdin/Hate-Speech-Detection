@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Örnekler {% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="row">
+      <div class="col-2">
+        <div class="list-group" sstyle="position: fixed; margin-top: 70px">
+            <a href="{% url 'home' %}" class="list-group-item list-group-item-action">Çalışma Hakkında Bilgiler</a>
+            <a href="{% url 'dataset' %}" class="list-group-item list-group-item-action">Veri Seti</a>
+            <a href="{% url 'examples' %}" class="list-group-item list-group-item-action active" aria-current="true">Örnekler</a>
+        </div>
+      </div>
+      <div class="col-10">
+        <h1 class="text-center mt-2" style="color: blue;">Örnekler</h1>
+        <hr>
+        <div class="container mt-3">
+          <div class="card mb-5">
+            <h3 style="color: blue">Örnek Tweet ve Sonuçlar</h3>
+            <div class="card-body">
+              {% if table_no == 1 %}
+                <table id="example_table" style="margin-left:auto;margin-right:auto;">
+                  <tbody>
+                    <tr>
+                      <td><b>Örnek Tweet:</b></td>
+                      <td>{{ example_tweet }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Irkçı Keywordlere Benzerlik: </b></td>
+                      <td>{{ example_sim_rac }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Cinsiyetçi Keywordlere Benzerlik: </b></td>
+                      <td>{{ example_sim_sex }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Nefret Söylemi Türü: </b></td>
+                      <td>{{ hate_type }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              {% endif %}
+              {% if table_no == 2 %}
+                <table id="user_example_table" style="margin-left:auto;margin-right:auto;">
+                  <tbody>
+                    <tr>
+                      <td><b>Kullanıcı Tweeti: </b></td>
+                      <td>{{ user_tweet }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Temizlenmiş Tweet: </b></td>
+                      <td>{{ user_example_tweet }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Model Tahmini: </b></td>
+                      <td>{{ user_pred }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Irkçı Keywordlere Benzerlik: </b></td>
+                      <td>{{ user_example_sim_rac }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Cinsiyetçi Keywordlere Benzerlik: </b></td>
+                      <td>{{ user_example_sim_sex }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Nefret Söylemi Türü: </b></td>
+                      <td>{{ user_hate_type }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              {% endif %}  
+            </div>
+          </div>
+          <div class="mt-0">
+            <form action="{% url 'examples' %}" method="POST">
+              {% csrf_token %}
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+              <div class="row mb-0">
+                <div class="col">
+                    <label for="tweet" class="form-label">Veri Setinden Örnek Tweet</label>
+                </div>
+              </div>
+              <div class="mb-5">
+                  <input type="submit" value="Örnek Tweet" name="from_data" class="btn btn-primary">
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                    <label for="tweet" class="form-label">Tweet Giriniz</label>
+                    <input type="text" class="form-control" name="tweet">
+                </div>
+              </div>
+              <div class="mb-3">
+                <input type="submit" value="Tweetle" name="from_user" class="btn btn-primary">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

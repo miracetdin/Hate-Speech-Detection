@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Veri Seti {% endblock %}
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="row">
+      <div class="col-2">
+        <div class="list-group" style="position: fixed; margin-top: 70px">
+            <a href="{% url 'home' %}" class="list-group-item list-group-item-action">Çalışma Hakkında Bilgiler</a>
+            <a href="{% url 'dataset' %}" class="list-group-item list-group-item-action active" aria-current="true">Veri Seti</a>
+            <a href="{% url 'examples' %}" class="list-group-item list-group-item-action">Örnekler</a>
+        </div>
+      </div>
+      <div class="col-10">
+        <h1 class="text-center mt-2" style="color: blue;">Veri Seti</h1>
+        <hr>
+        <div class="container mt-3">
+          <div class="card mb-5">
+            <h3 style="color: blue">Veri Seti Genel Bilgileri</h3>
+            <div class="card-body" style="margin-left:auto;margin-right:auto;">
+              {{ info|safe }} 
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Veri Seti</h3>
+            <div class="card-body">
+              {{ dataset|safe }} 
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Veri Dağılımı</h3>
+            <div class="card-body">
+              <p><b>Toplam Tweet Sayısı:</b> {{ total_num }}</p>
+              <p><b>Nefret Söylemi İçeren Tweet Sayısı:</b> {{ hate_num }}</p>
+              <p><b>Nefret Söylemi İçermeyen Tweet Sayısı:</b> {{ not_hate_num }}</p> 
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Username Temizlenmiş Veri Seti</h3>
+            <div class="card-body">
+              {{ not_user_dataset|safe }} 
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Temizlenmiş Veri Seti</h3>
+            <div class="card-body">
+              {{ clean_dataset|safe }} 
+            </div>
+          </div>
+          <div class="card mb-5">
+            <h3 style="color: blue">Stemming Yapılmış Veri Seti</h3>
+            <div class="card-body">
+              {{ stemming_dataset|safe }} 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
